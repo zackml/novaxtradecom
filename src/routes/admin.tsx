@@ -334,7 +334,7 @@ function InvitesAdmin() {
   }
 
   function copyLink(code: string) {
-    const url = `${window.location.origin}/signup?invite=${encodeURIComponent(code)}`;
+    const url = `${window.location.origin}/auth/register?ref=${encodeURIComponent(code)}`;
     navigator.clipboard.writeText(url);
     toast.success("Invite link copied");
   }

@@ -88,7 +88,7 @@ function LoginPage() {
 
           <p className="text-center text-sm text-muted-foreground mt-6">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-primary hover:underline">
+            <Link to="/auth/register" className="text-primary hover:underline">
               Use your invite
             </Link>
           </p>

@@ -1,4 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -9,24 +11,35 @@ import { useAuth } from "@/components/auth-provider";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 
-export const Route = createFileRoute("/signup")({
+const searchSchema = z.object({
+  ref: fallback(z.string(), "").default(""),
+});
+
+export const Route = createFileRoute("/auth/register")({
+  validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
       { title: "Create account — NovaX" },
-      { name: "description", content: "Sign up for NovaX." },
+      { name: "description", content: "Sign up for NovaX with your invite code." },
     ],
   }),
-  component: SignupPage,
+  component: RegisterPage,
 });
 
-function SignupPage() {
+function RegisterPage() {
+  const { ref } = Route.useSearch();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState(ref ?? "");
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (ref) setInviteCode(ref);
+  }, [ref]);
 
   useEffect(() => {
     if (user) navigate({ to: "/dashboard" });
@@ -36,13 +49,37 @@ function SignupPage() {
     e.preventDefault();
     setSubmitting(true);
 
+    const code = inviteCode.trim();
+    if (!code) {
+      setSubmitting(false);
+      toast.error("Invite code is required.");
+      return;
+    }
+
+    // Validate invite code against Supabase
+    const { data: valid, error: validateError } = await supabase.rpc(
+      "validate_invite_code",
+      { _code: code },
+    );
+
+    if (validateError) {
+      setSubmitting(false);
+      toast.error(validateError.message);
+      return;
+    }
+    if (!valid) {
+      setSubmitting(false);
+      toast.error("Invalid or expired invite code.");
+      return;
+    }
+
     const redirectUrl = `${window.location.origin}/dashboard`;
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: redirectUrl,
-        data: { display_name: displayName },
+        data: { display_name: displayName, invite_code: code },
       },
     });
 
@@ -50,6 +87,14 @@ function SignupPage() {
       setSubmitting(false);
       toast.error(error.message);
       return;
+    }
+
+    // Consume invite code (best-effort; ignore errors so signup still succeeds)
+    const { error: consumeError } = await supabase.rpc("consume_invite_code", {
+      _code: code,
+    });
+    if (consumeError) {
+      console.warn("Failed to consume invite code:", consumeError.message);
     }
 
     setSubmitting(false);
@@ -73,6 +118,18 @@ function SignupPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="invite">Invite code</Label>
+              <Input
+                id="invite"
+                required
+                value={inviteCode}
+                onChange={(e) => setInviteCode(e.target.value)}
+                className="mt-1.5"
+                placeholder="Your invite code"
+                readOnly={!!ref}
+              />
+            </div>
             <div>
               <Label htmlFor="name">Display name</Label>
               <Input
