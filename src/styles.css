@@ -44,6 +44,9 @@
   --animate-scale-in: scale-in 0.3s ease-out;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-mesh-drift: mesh-drift 18s ease-in-out infinite;
+  --animate-cta-glow: cta-glow 2.4s ease-in-out infinite;
   --animate-ticker: ticker 40s linear infinite;
 }
 
