@@ -44,6 +44,9 @@
   --animate-scale-in: scale-in 0.3s ease-out;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-mesh-drift: mesh-drift 18s ease-in-out infinite;
+  --animate-cta-glow: cta-glow 2.4s ease-in-out infinite;
   --animate-ticker: ticker 40s linear infinite;
 }
 
@@ -67,11 +70,19 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
+@keyframes mesh-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(3%, -2%, 0) scale(1.05); }
+  66% { transform: translate3d(-3%, 2%, 0) scale(0.97); }
+}
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 55%, transparent), 0 10px 40px -10px color-mix(in oklab, var(--primary) 60%, transparent); }
+  50% { box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 0%, transparent), 0 20px 60px -10px color-mix(in oklab, var(--primary) 80%, transparent); }
+}
 @keyframes ticker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-
 :root {
   --radius: 0.875rem;
 
