@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { AuthProvider } from "@/components/auth-provider";
 import { ProfitTicker } from "@/components/profit-ticker";
 import { Toaster } from "@/components/ui/sonner";
+import BottomNav from "@/components/BottomNav";
 
 import appCss from "../styles.css?url";
 
@@ -76,6 +77,7 @@ function RootComponent() {
     <AuthProvider>
       <ProfitTicker />
       <Outlet />
+      <BottomNav />
       <Toaster />
     </AuthProvider>
   );
