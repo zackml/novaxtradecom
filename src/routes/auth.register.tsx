@@ -9,11 +9,11 @@ import { useAuth } from "@/components/auth-provider";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 
-type RegisterSearch = { ref: string };
+type RegisterSearch = { ref?: string };
 
 export const Route = createFileRoute("/auth/register")({
   validateSearch: (search: Record<string, unknown>): RegisterSearch => ({
-    ref: typeof search.ref === "string" ? search.ref : "",
+    ref: typeof search.ref === "string" && search.ref.length > 0 ? search.ref : undefined,
   }),
   head: () => ({
     meta: [
