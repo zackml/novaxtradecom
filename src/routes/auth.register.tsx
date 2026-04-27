@@ -1,6 +1,4 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -11,12 +9,12 @@ import { useAuth } from "@/components/auth-provider";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
 
-const searchSchema = z.object({
-  ref: fallback(z.string(), "").default(""),
-});
+type RegisterSearch = { ref: string };
 
 export const Route = createFileRoute("/auth/register")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>): RegisterSearch => ({
+    ref: typeof search.ref === "string" ? search.ref : "",
+  }),
   head: () => ({
     meta: [
       { title: "Create account — NovaX" },
