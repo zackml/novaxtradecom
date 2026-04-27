@@ -105,7 +105,7 @@ export function SiteHeader() {
                   <Link to="/login">Sign in</Link>
                 </Button>
                 <Button asChild variant="hero" size="sm">
-                  <Link to="/signup">Get started</Link>
+                  <Link to="/auth/register">Get started</Link>
                 </Button>
               </>
             )}
