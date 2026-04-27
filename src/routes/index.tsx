@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { FakeLineChart, Sparkline } from "@/components/fake-chart";
 import { CoinIcon } from "@/components/coin-icon";
 import { COINS, formatPrice } from "@/lib/market-data";
+import heroCrypto3d from "@/assets/hero-crypto-3d.png";
 import {
   ArrowRight,
   ShieldCheck,
