@@ -35,45 +35,130 @@ function Landing() {
     <div className="min-h-screen">
       <SiteHeader />
 
-      {/* Hero */}
+      {/* Hero — Figma 3D style with glassmorphism + animated mesh gradient */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[500px] w-[900px] bg-gradient-primary opacity-20 blur-3xl rounded-full animate-glow-pulse" />
+        {/* Animated mesh gradient background */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/40 blur-[120px] animate-mesh-drift" />
+          <div
+            className="absolute top-10 right-0 h-[560px] w-[560px] rounded-full bg-accent/40 blur-[130px] animate-mesh-drift"
+            style={{ animationDelay: "-6s" }}
+          />
+          <div
+            className="absolute bottom-0 left-1/3 h-[460px] w-[460px] rounded-full bg-chart-3/40 blur-[120px] animate-mesh-drift"
+            style={{ animationDelay: "-12s" }}
+          />
+          <div className="absolute inset-0 grid-bg opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+        </div>
 
-        <div className="container relative mx-auto px-4 pt-20 pb-24 md:pt-32 md:pb-36">
-          <div className="mx-auto max-w-3xl text-center animate-slide-up">
-            <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground mb-6">
-              <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-              Live markets · Real-time data
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-              Trade the future of <span className="text-gradient">digital assets</span>
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              A next-generation crypto trading interface. Lightning-fast, beautifully designed, built for serious traders.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button asChild variant="hero" size="xl">
-                <Link to="/dashboard">
-                  Launch Dashboard <ArrowRight />
-                </Link>
-              </Button>
-              <Button asChild variant="glass" size="xl">
-                <Link to="/markets">Explore Markets</Link>
-              </Button>
+        <div className="container relative mx-auto px-4 pt-16 pb-24 md:pt-24 md:pb-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: copy */}
+            <div className="animate-slide-up text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground mb-6">
+                <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+                Live markets · Real-time precision
+              </div>
+              <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.05]">
+                Trade the Future with{" "}
+                <span className="text-gradient">Precision</span>
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl lg:max-w-none lg:pr-8 mx-auto lg:mx-0">
+                A next-generation crypto trading interface. Lightning-fast execution,
+                institutional-grade tools, built for serious traders.
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3">
+                <Button
+                  asChild
+                  variant="hero"
+                  size="xl"
+                  className="animate-cta-glow rounded-full"
+                >
+                  <Link to="/auth/register">
+                    Start Trading Now <ArrowRight />
+                  </Link>
+                </Button>
+                <Button asChild variant="glass" size="xl" className="rounded-full">
+                  <Link to="/markets">Explore Markets</Link>
+                </Button>
+              </div>
+
+              {/* Floating glass stat cards */}
+              <div className="mt-12 grid grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
+                {[
+                  { v: "$2.4B", l: "24h Volume" },
+                  { v: "1.2M+", l: "Traders" },
+                  { v: "350+", l: "Pairs" },
+                ].map((s, i) => (
+                  <div
+                    key={s.l}
+                    className="glass-strong rounded-2xl p-4 shadow-elegant animate-float"
+                    style={{ animationDelay: `${i * 0.6}s` }}
+                  >
+                    <div className="text-2xl font-bold text-gradient">{s.v}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-xl mx-auto">
-              {[
-                { v: "$2.4B", l: "24h Volume" },
-                { v: "1.2M+", l: "Traders" },
-                { v: "350+", l: "Pairs" },
-              ].map((s) => (
-                <div key={s.l} className="glass rounded-xl p-4">
-                  <div className="text-2xl font-bold text-gradient">{s.v}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
+            {/* Right: 3D crypto illustration with orbiting glass cards */}
+            <div className="relative h-[460px] md:h-[560px] lg:h-[620px] animate-fade-in">
+              {/* Radial glow behind */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-[360px] w-[360px] md:h-[460px] md:w-[460px] rounded-full bg-gradient-primary opacity-30 blur-3xl animate-glow-pulse" />
+              </div>
+
+              {/* Main 3D image */}
+              <img
+                src={heroCrypto3d}
+                alt="3D crypto coins floating"
+                width={1024}
+                height={1024}
+                className="relative z-10 mx-auto h-full w-auto object-contain animate-float-slow drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
+              />
+
+              {/* Orbiting glass card — top left */}
+              <div
+                className="hidden md:flex absolute top-6 left-0 z-20 glass-strong rounded-2xl p-4 shadow-elegant min-w-[180px] animate-float"
+                style={{ animationDelay: "-2s" }}
+              >
+                <div className="flex items-center gap-3">
+                  <CoinIcon symbol="BTC" size={32} />
+                  <div>
+                    <div className="text-xs text-muted-foreground">BTC / USDT</div>
+                    <div className="font-semibold">$67,482</div>
+                    <div className="text-xs text-success">+2.34%</div>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Orbiting glass card — bottom right */}
+              <div
+                className="hidden md:flex absolute bottom-10 right-0 z-20 glass-strong rounded-2xl p-4 shadow-elegant min-w-[180px] animate-float"
+                style={{ animationDelay: "-4s" }}
+              >
+                <div className="flex items-center gap-3">
+                  <CoinIcon symbol="ETH" size={32} />
+                  <div>
+                    <div className="text-xs text-muted-foreground">ETH / USDT</div>
+                    <div className="font-semibold">$3,824</div>
+                    <div className="text-xs text-success">+1.12%</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Orbiting sparkline card — middle right */}
+              <div
+                className="hidden lg:block absolute top-1/2 -right-4 z-20 glass-strong rounded-2xl p-3 shadow-elegant animate-float-slow"
+                style={{ animationDelay: "-3s" }}
+              >
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
+                  Portfolio
+                </div>
+                <Sparkline seed={7} bullish />
+              </div>
             </div>
           </div>
 
