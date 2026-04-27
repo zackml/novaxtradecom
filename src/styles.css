@@ -79,6 +79,10 @@
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 55%, transparent), 0 10px 40px -10px color-mix(in oklab, var(--primary) 60%, transparent); }
   50% { box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 0%, transparent), 0 20px 60px -10px color-mix(in oklab, var(--primary) 80%, transparent); }
 }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 :root {
   --radius: 0.875rem;
 
