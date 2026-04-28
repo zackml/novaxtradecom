@@ -52,13 +52,12 @@ useEffect(() => {
 
     setSubmitting(true);
 
-    const code = inviteCode.trim();
-    if (!code) {
-      setSubmitting(false);
-      toast.error("Referral code is required.");
-      return;
-    }
-
+  const code = inviteCode.trim();
+if (!code || !ref || code !== ref) {
+  setSubmitting(false);
+  toast.error("Registration requires a valid referral link.");
+  return;
+}
     try {
       const { data: valid, error: validateError } = await supabase.rpc("validate_invite_code", {
         _code: code,
