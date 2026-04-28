@@ -46,8 +46,8 @@ export function SiteHeader() {
               <Link
                 key={l.to}
                 to={l.to}
-                className="px-4 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/5 transition"
-                activeProps={{ className: "px-4 py-2 rounded-md text-foreground bg-white/5" }}
+                className="nav-link relative px-4 py-2 rounded-md text-muted-foreground hover:text-foreground transition"
+                activeProps={{ className: "nav-link nav-link-active relative px-4 py-2 rounded-md text-foreground" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}

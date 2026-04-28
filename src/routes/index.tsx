@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { FakeLineChart, Sparkline } from "@/components/fake-chart";
+// Sparkline is also used in the Top Movers table below
 import { CoinIcon } from "@/components/coin-icon";
 import { COINS, formatPrice } from "@/lib/market-data";
 import heroCrypto3d from "@/assets/hero-crypto-3d.png";
@@ -104,10 +105,10 @@ function Landing() {
             </div>
 
             {/* Right: 3D crypto illustration with orbiting glass cards */}
-            <div className="relative h-[460px] md:h-[560px] lg:h-[620px] animate-fade-in">
+            <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-none aspect-square lg:h-[620px] lg:aspect-auto animate-fade-in">
               {/* Radial glow behind */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-[360px] w-[360px] md:h-[460px] md:w-[460px] rounded-full bg-gradient-primary opacity-30 blur-3xl animate-glow-pulse" />
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="h-[70%] w-[70%] rounded-full bg-gradient-primary opacity-30 blur-3xl animate-glow-pulse" />
               </div>
 
               {/* Main 3D image */}
@@ -116,12 +117,13 @@ function Landing() {
                 alt="3D crypto coins floating"
                 width={1024}
                 height={1024}
-                className="relative z-10 mx-auto h-full w-auto object-contain animate-float-slow drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
+                loading="eager"
+                className="relative z-10 mx-auto h-full w-full object-contain animate-float-slow drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
               />
 
-              {/* Orbiting glass card — top left */}
+              {/* Orbiting glass card — top left (tablet+) */}
               <div
-                className="hidden md:flex absolute top-6 left-0 z-20 glass-strong rounded-2xl p-4 shadow-elegant min-w-[180px] animate-float"
+                className="hidden md:flex absolute top-4 left-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant min-w-[170px] animate-float"
                 style={{ animationDelay: "-2s" }}
               >
                 <div className="flex items-center gap-3">
@@ -134,9 +136,9 @@ function Landing() {
                 </div>
               </div>
 
-              {/* Orbiting glass card — bottom right */}
+              {/* Orbiting glass card — bottom right (tablet+) */}
               <div
-                className="hidden md:flex absolute bottom-10 right-0 z-20 glass-strong rounded-2xl p-4 shadow-elegant min-w-[180px] animate-float"
+                className="hidden md:flex absolute bottom-6 right-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant min-w-[170px] animate-float"
                 style={{ animationDelay: "-4s" }}
               >
                 <div className="flex items-center gap-3">
@@ -147,17 +149,6 @@ function Landing() {
                     <div className="text-xs text-success">+1.12%</div>
                   </div>
                 </div>
-              </div>
-
-              {/* Orbiting sparkline card — middle right */}
-              <div
-                className="hidden lg:block absolute top-1/2 -right-4 z-20 glass-strong rounded-2xl p-3 shadow-elegant animate-float-slow"
-                style={{ animationDelay: "-3s" }}
-              >
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
-                  Portfolio
-                </div>
-                <Sparkline seed={7} bullish />
               </div>
             </div>
           </div>
