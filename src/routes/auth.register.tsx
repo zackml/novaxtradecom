@@ -33,9 +33,14 @@ function RegisterPage() {
   const [inviteCode, setInviteCode] = useState(ref ?? "");
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    setInviteCode(ref ?? "");
-  }, [ref]);
+useEffect(() => {
+  if (!ref) {
+    navigate({ to: "/" });
+    return;
+  }
+
+  setInviteCode(ref);
+}, [ref, navigate]);
 
   useEffect(() => {
     if (user) navigate({ to: "/dashboard" });
