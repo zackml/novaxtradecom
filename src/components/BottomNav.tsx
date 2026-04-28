@@ -1,9 +1,10 @@
 import { Home, BarChart2, Wallet, User } from "lucide-react";
 import { Link, useLocation } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
 type NavItem = {
   label: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   path: "/" | "/markets" | "/portfolio" | "/dashboard";
 };
 
