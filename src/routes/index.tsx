@@ -36,20 +36,20 @@ function Landing() {
     <div className="min-h-screen">
       <SiteHeader />
 
-      {/* Hero — Figma 3D style with glassmorphism + animated mesh gradient */}
-      <section className="relative overflow-hidden">
-        {/* Animated mesh gradient background */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/40 blur-[120px] animate-mesh-drift" />
+      {/* Hero — clean responsive design with glassmorphism + animated mesh gradient */}
+      <section className="relative overflow-hidden isolate">
+        {/* Animated mesh gradient background — contained, won't overflow on mobile */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-32 -left-20 h-[320px] w-[320px] md:h-[520px] md:w-[520px] rounded-full bg-primary/30 md:bg-primary/40 blur-[100px] md:blur-[120px] animate-mesh-drift" />
           <div
-            className="absolute top-10 right-0 h-[560px] w-[560px] rounded-full bg-accent/40 blur-[130px] animate-mesh-drift"
+            className="absolute top-10 -right-20 h-[340px] w-[340px] md:h-[560px] md:w-[560px] rounded-full bg-accent/30 md:bg-accent/40 blur-[110px] md:blur-[130px] animate-mesh-drift"
             style={{ animationDelay: "-6s" }}
           />
           <div
-            className="absolute bottom-0 left-1/3 h-[460px] w-[460px] rounded-full bg-chart-3/40 blur-[120px] animate-mesh-drift"
+            className="hidden md:block absolute bottom-0 left-1/3 h-[460px] w-[460px] rounded-full bg-chart-3/40 blur-[120px] animate-mesh-drift"
             style={{ animationDelay: "-12s" }}
           />
-          <div className="absolute inset-0 grid-bg opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+          <div className="absolute inset-0 grid-bg opacity-10 md:opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         </div>
 
         <div className="container relative mx-auto px-4 pt-16 pb-24 md:pt-24 md:pb-32">
@@ -104,11 +104,11 @@ function Landing() {
               </div>
             </div>
 
-            {/* Right: 3D crypto illustration with orbiting glass cards */}
-            <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-none aspect-square lg:h-[620px] lg:aspect-auto animate-fade-in">
+            {/* Right: 3D crypto illustration — clean & responsive */}
+            <div className="relative mx-auto w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[560px] aspect-square animate-fade-in">
               {/* Radial glow behind */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="h-[70%] w-[70%] rounded-full bg-gradient-primary opacity-30 blur-3xl animate-glow-pulse" />
+              <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="h-[65%] w-[65%] rounded-full bg-gradient-primary opacity-25 md:opacity-30 blur-3xl animate-glow-pulse" />
               </div>
 
               {/* Main 3D image */}
@@ -121,9 +121,9 @@ function Landing() {
                 className="relative z-10 mx-auto h-full w-full object-contain animate-float-slow drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
               />
 
-              {/* Orbiting glass card — top left (tablet+) */}
+              {/* Orbiting glass card — top left (md+ only, kept inside container) */}
               <div
-                className="hidden md:flex absolute top-4 left-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant min-w-[170px] animate-float"
+                className="hidden md:flex absolute top-2 left-2 lg:left-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant animate-float"
                 style={{ animationDelay: "-2s" }}
               >
                 <div className="flex items-center gap-3">
@@ -136,9 +136,9 @@ function Landing() {
                 </div>
               </div>
 
-              {/* Orbiting glass card — bottom right (tablet+) */}
+              {/* Orbiting glass card — bottom right (md+ only) */}
               <div
-                className="hidden md:flex absolute bottom-6 right-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant min-w-[170px] animate-float"
+                className="hidden md:flex absolute bottom-2 right-2 lg:right-0 z-20 glass-strong rounded-2xl p-3 lg:p-4 shadow-elegant animate-float"
                 style={{ animationDelay: "-4s" }}
               >
                 <div className="flex items-center gap-3">
